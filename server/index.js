@@ -37,8 +37,8 @@ app.get(`${baseDir}members/`, (req,res) => {
 //init lowdb
 low(adapter)
 .then(db => {
-  // Routes
-  // GET /posts/:name
+  // Login
+  //GET /user/:name
   app.get('/user/:name', (req, res) => {
     const user = db.get('user')
       .find({ name: req.params.name })
@@ -52,9 +52,10 @@ low(adapter)
       .value()
     user['id'] = id
     res.send(user)
+    console.log(`a user logged in: ${req.params.name}`)
   })
-
-  // POST /posts
+  // Make User
+  // POST /user/make/:name
   app.post('/user/make/:name', (req, res) => {
     const user = db.get('user')
       .find({ name: req.params.name })
@@ -69,6 +70,7 @@ low(adapter)
       .last()
       .write()
       .then(post => res.send(post))
+    console.log(`a user created: ${req.params.name}`)
   })
 
   // Set db default values
@@ -114,7 +116,7 @@ async function start() {
   const io = socketio.listen(server)
 
   io.on('connection', function (socket) {
-    console.log('a user connected', socket.id);
+    // console.log('a user connected', socket.id);
     // send comment
     socket.on('comment', function (msg) {
       console.log('comment: ', msg);
