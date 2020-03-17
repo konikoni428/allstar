@@ -6,21 +6,25 @@
 This is a Quiz Web Application like japanese famous TV show.
 It is made with Nuxt.js, SocketIO For party.
 
-## 構成
+## Getting Started
 
-### サーバー
+### For Production
 
-クイズの出題や結果を管理し、ユーザーとモニターに配信を行います。
-nuxtでのexpressにて、サーバーとして稼働させます。
+```bash
+$ git clone https://github.com/konikoni428/allstar.git
+$ cd allstart
+$ npm install
+$ npm run build
+$ npm run start 
+```
+### For Development
 
-### ユーザー
-
-クイズを受け、回答をするインターフェースです。
-回答者はこちらの画面をスマホなどでアクセスし、問題を受け、回答をしていきます。
-
-### モニター
-
-イベントの進行（クイズやアナウンス）などを表示する機能です。
+```bash
+$ git clone https://github.com/konikoni428/allstar.git
+$ cd allstar
+$ npm install
+$ npm run dev
+```
 
 ## 設定
 
@@ -102,13 +106,35 @@ nuxtでのexpressにて、サーバーとして稼働させます。
   * start: 某番組的にいうと、CMから戻った際のジングル
   * intermission: 某番組的にいうと、CMに入る際の参加者が拍手しながらかかる
   * period: 某番組的にいうと、ピリオド開始時に全員がスタンドアップするときにかかる
-  * question": 某番組的にいうと、レディーゴーの音。
+  * question": 某番組的にいうと、レディーゴーの音。  
+  
+allstart/static/sound/start.wav  
+などに保存すると良いです。
 
-  などなど
 
 ### 参加者
 
-`assets/members.js` に以下の形でログインメンバーを編集します。
+自動追加  
+/asset/db.json  
+に書き込まれます。  
+
+## 構成
+
+### サーバー
+
+クイズの出題や結果を管理し、ユーザーとモニターに配信を行います。
+nuxtでのexpressにて、サーバーとして稼働させます。
+
+### ユーザー
+
+クイズを受け、回答をするインターフェースです。
+回答者はこちらの画面をスマホなどでアクセスし、問題を受け、回答をしていきます。
+
+### モニター
+
+イベントの進行（クイズやアナウンス）などを表示する機能です。
+
+<!-- `assets/members.js` に以下の形でログインメンバーを編集します。
 * `name` は表示される名前です。
 * `account` はログイン時に必要なアカウント名です。
 * `status` は0,1で解答権の有無を管理します。
@@ -122,4 +148,4 @@ nuxtでのexpressにて、サーバーとして稼働させます。
     "status": 1
   }
 }
-```
+``` -->
