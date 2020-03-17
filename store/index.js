@@ -1,5 +1,3 @@
-import members from "~/assets/members.json";
-
 export const state = () => ({
   authUser: null
 })

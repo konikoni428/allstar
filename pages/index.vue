@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import member from "~/assets/members.json";
 import axios from "axios"
 import LogoImage from "~/components/LogoImage";
 
@@ -41,9 +40,6 @@ export default {
     accountName() {
       return this.account != null ? this.account.name : "";
     },
-    members() {
-      return member != null ? member : null;
-    }
   },
   mounted() {
   },
