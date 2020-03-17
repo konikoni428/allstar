@@ -46,11 +46,13 @@ export default {
       let text = null
       switch (parseInt(status)) {
         case 1:
-          text = 'Alive'
+          text = '正解中'
           break;
         case 0:
-          text = 'Dead'
+          text = '不正解あり'
           break;
+        case -1:
+          text = 'スタンドアップされていません'
         default:
           text = 'Unknown'
           break;
