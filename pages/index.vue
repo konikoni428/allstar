@@ -54,10 +54,13 @@ export default {
       return this.warnings.length > 0;
     },
     async login() {
-
-
       try {
         this.clearWarning();
+
+        if(!this.loginAccount){
+          this.addWarning('アカウント名を入力してください。')
+          return
+        }
 
         await this.$axios.post(`/user/make/${this.loginAccount}`)
           .then(function(res){
@@ -68,15 +71,7 @@ export default {
               throw new Error("名前が重複しています。異なる名前を指定してください")
             }
           })
-        // if (!this.loginNumber > 0) {
-        //   this.addWarning('番号は数値を入力してください。');
-        // }
-        // if (!/^[a-z0-9-]+$/.test(this.loginAccount)) {
-        //   this.addWarning('アカウントは英数字で入力してください。');
-        // }
-        // if (this.hasWarnings()) {
-        //   throw new Error('ログイン失敗');
-        // }
+
         await this.$axios.get(`/user/${this.loginAccount}`)
           .then(function(res){
             console.log(res)
