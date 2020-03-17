@@ -3,6 +3,10 @@ const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
 const bodyParser = require('body-parser');
 
+const low = require('lowdb')
+const FileAsync = require('lowdb/adapters/FileAsync')
+const adapter = new FileAsync('./assets/db.json')
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -13,6 +17,7 @@ const config = require('../nuxt.config.js');
 config.dev = process.env.NODE_ENV !== 'production';
 
 const baseDir = config.router.base || '/'
+
 
 // Answer Data
 let answerResult = []
@@ -27,6 +32,47 @@ app.get(`${baseDir}total/`, (req,res) => {
 
 app.get(`${baseDir}members/`, (req,res) => {
   res.json(answerResult)
+})
+
+//init lowdb
+low(adapter)
+.then(db => {
+  // Routes
+  // GET /posts/:name
+  app.get('/user/:name', (req, res) => {
+    const user = db.get('user')
+      .find({ name: req.params.name })
+      .value()
+    if(user === undefined){
+      res.status(401).send("the name is not exist")
+      return
+    }
+    const id = db.get('user')
+      .findIndex({ name: req.params.name })
+      .value()
+    user['id'] = id
+    res.send(user)
+  })
+
+  // POST /posts
+  app.post('/user/make/:name', (req, res) => {
+    const user = db.get('user')
+      .find({ name: req.params.name })
+      .value()
+    if (user !== undefined){
+      res.status(409).send('the username already exist')
+      return
+    }
+
+    db.get('user')
+      .push({ name: req.params.name})
+      .last()
+      .write()
+      .then(post => res.send(post))
+  })
+
+  // Set db default values
+  return db.defaults({ user: [] }).write()
 })
 
 function initAnswerResult() {
