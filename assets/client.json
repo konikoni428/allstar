@@ -1,5 +1,5 @@
 {
-  "serverAddress": "localhost:3000",
+  "serverAddress": "ec2-52-68-210-32.ap-northeast-1.compute.amazonaws.com:3000",
   "image": {
     "basePath" : "/img/",
     "logoFile" : "logo.png"
