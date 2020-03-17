@@ -53,6 +53,7 @@ export default {
           break;
         case -1:
           text = 'スタンドアップされていません'
+          break;
         default:
           text = 'Unknown'
           break;
