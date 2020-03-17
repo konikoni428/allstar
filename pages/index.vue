@@ -8,20 +8,20 @@
           .alert.alert-danger(v-if="hasWarnings()")
             ul.mb-1
               li(v-for="(v,i) in warnings") {{v}}
+        //- .input-group.input-group-lg.mb-2
+        //-   .input-group-prepend
+        //-     .input-group-text.w-100.text-center 番号
+        //-   input.form-control(type="number" v-model="loginNumber" pattern="\d*" )
         .input-group.input-group-lg.mb-2
           .input-group-prepend
-            .input-group-text.w-100.text-center 番号
-          input.form-control(type="number" v-model="loginNumber" pattern="\d*" )
-        .input-group.input-group-lg.mb-2
-          .input-group-prepend
-            .input-group-text.w-100.text-center アカウント
+            .input-group-text.w-100.text-center 名前
           input.form-control(type="text" v-model.trim="loginAccount")
         button.p-3.w-100.btn.btn-lg.btn-primary(@click="login") ログイン
 </template>
 
 <script>
 import member from "~/assets/members.json";
-
+import axios from "axios"
 import LogoImage from "~/components/LogoImage";
 
 export default {
@@ -33,6 +33,7 @@ export default {
       account: null,
       loginNumber: null,
       loginAccount: null,
+      name: null,
       warnings: []
     };
   },
@@ -57,22 +58,41 @@ export default {
       return this.warnings.length > 0;
     },
     async login() {
+
+
       try {
         this.clearWarning();
-        if (!this.loginNumber > 0) {
-          this.addWarning('番号は数値を入力してください。');
-        }
-        if (!/^[a-z0-9-]+$/.test(this.loginAccount)) {
-          this.addWarning('アカウントは英数字で入力してください。');
-        }
-        if (this.hasWarnings()) {
-          throw new Error('ログイン失敗');
-        }
 
-        await this.$store.dispatch("login", {
-          loginNumber: this.loginNumber,
-          loginAccount: this.loginAccount
-        })
+        await this.$axios.post(`/user/make/${this.loginAccount}`)
+          .then(function(res){
+          })
+          .catch(function(err){
+            const check = window.confirm('名前が重複しています。再ログインの場合のみOKを押してください')
+            if(check === false){
+              throw new Error("名前が重複しています。異なる名前を指定してください")
+            }
+          })
+        // if (!this.loginNumber > 0) {
+        //   this.addWarning('番号は数値を入力してください。');
+        // }
+        // if (!/^[a-z0-9-]+$/.test(this.loginAccount)) {
+        //   this.addWarning('アカウントは英数字で入力してください。');
+        // }
+        // if (this.hasWarnings()) {
+        //   throw new Error('ログイン失敗');
+        // }
+        await this.$axios.get(`/user/${this.loginAccount}`)
+          .then(function(res){
+            console.log(res)
+            this.loginAccount = res.data.name
+            this.loginNumber = res.data.id
+
+            this.$store.dispatch("login", {
+              loginNumber: this.loginNumber,
+              loginAccount: this.loginAccount
+            })
+          }.bind(this))
+
         this.$router.push("/client")
       } catch (e) {
         this.addWarning(e.message);
