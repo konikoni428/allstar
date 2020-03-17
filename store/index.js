@@ -13,15 +13,21 @@ export const mutations = {
 export const actions = {
   login({ commit }, { loginNumber, loginAccount }) {
     try {
-      const member = members[loginNumber]
+      // const member = members[loginNumber]
 
-      if (member == null) {
-        throw new Error("該当番号のユーザーが存在しません")
+      // if (member == null) {
+      //   throw new Error("該当番号のユーザーが存在しません")
+      // }
+      // if (member.account !== loginAccount) {
+      //   throw new Error("該当アカウントが存在しません。")
+      // }
+      // member.number = loginNumber
+      const member = {
+        "name": loginAccount,
+        "account": loginAccount,
+        "status": 1,
+        "number": loginNumber
       }
-      if (member.account !== loginAccount) {
-        throw new Error("該当アカウントが存在しません。")
-      }
-      member.number = loginNumber
       commit("AUTHED_USER", member)
     } catch (e) {
       throw e;
