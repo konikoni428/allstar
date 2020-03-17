@@ -133,6 +133,10 @@ export default {
   mounted() {
     this.messages.push({ message: '前面モニター' })
 
+    this.socket.on("sendMessage", message => {
+      this.messages.push(message)
+    })
+
     this.socket.on("comment", data => {
       if (this.mode > 0) {
         this.messages = []

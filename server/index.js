@@ -247,6 +247,10 @@ async function start() {
     socket.on('resetAnswerResult', () => {
       initAnswerResult()
     })
+
+    socket.on('sendMessage', message => {
+      io.emit('sendMessage', message)
+    })
   });
 }
 
