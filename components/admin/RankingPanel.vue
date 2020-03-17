@@ -20,28 +20,9 @@
         tbody
           tr.w-100(v-for="(v,i) in totalRanking")
             td {{v.counter}} 回
-            td {{v.elapse}} 秒
+            td {{v.elapse / 1000.00}} 秒
             td {{v.name}}
-          tr.w-100(v-for="(v,i) in totalRanking")
-            td {{v.counter}} 回
-            td {{v.elapse}} 秒
-            td {{v.name}}
-          tr.w-100(v-for="(v,i) in totalRanking")
-            td {{v.counter}} 回
-            td {{v.elapse}} 秒
-            td {{v.name}}
-          tr.w-100(v-for="(v,i) in totalRanking")
-            td {{v.counter}} 回
-            td {{v.elapse}} 秒
-            td {{v.name}}
-          tr.w-100(v-for="(v,i) in totalRanking")
-            td {{v.counter}} 回
-            td {{v.elapse}} 秒
-            td {{v.name}}
-          tr.w-100(v-for="(v,i) in totalRanking")
-            td {{v.counter}} 回
-            td {{v.elapse}} 秒
-            td {{v.name}}
+
     .fixed-bottom.m-3
       details.p-3.border.border-danger.rounded.mt-3
         summary リセット系
