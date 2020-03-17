@@ -346,6 +346,7 @@ export default {
       return total
     },
     healthCheck() {
+      this.members = {}
       this.socket.emit("healthCheck");
     }
   }
