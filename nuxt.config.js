@@ -2,7 +2,8 @@
 module.exports = {
   mode: 'universal',
   env: {
-    baseUrl: 'http://ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com:3000'
+    HOST: 'ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com',
+    PORT: 3000
   },
   router: {
     base: '/',
@@ -24,8 +25,8 @@ module.exports = {
     ]
   },
   server: {
-    port: 3000, // デフォルト: 3000
-    host: 'ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com' // デフォルト: localhost
+    port: this.env.PORT, // デフォルト: 3000
+    host: this.env.HOST // デフォルト: localhost
   },
   /*
   ** Customize the progress-bar color
@@ -64,6 +65,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: `${this.env.HOST}:${this.env.PORT}`
   },
   /*
   ** Build configuration
