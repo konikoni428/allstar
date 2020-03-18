@@ -2,8 +2,9 @@
 module.exports = {
   mode: 'universal',
   env: {
-    HOST: 'ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com',
-    PORT: 3000
+    baseUrl: 'http://ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com:3000'
+    // HOST: 'ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com',
+    // PORT: 3000
   },
   router: {
     base: '/',
