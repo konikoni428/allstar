@@ -2,7 +2,7 @@
 module.exports = {
   mode: 'universal',
   env: {
-    baseUrl: 'http://ec2-52-68-210-32.ap-northeast-1.compute.amazonaws.com:3000'
+    baseUrl: 'http://ec2-52-199-84-243.ap-northeast-1.compute.amazonaws.com:3000'
   },
   router: {
     base: '/',
@@ -64,7 +64,6 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    //baseURL: 'http://ec2-52-68-210-32.ap-northeast-1.compute.amazonaws.com:3000'
   },
   /*
   ** Build configuration
