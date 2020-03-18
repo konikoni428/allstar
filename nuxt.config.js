@@ -22,7 +22,7 @@ module.exports = {
   },
   server: {
     port: 3000, // デフォルト: 3000
-    host: 'localhost' // デフォルト: localhost
+    host: 'ec2-52-68-210-32.ap-northeast-1.compute.amazonaws.com' // デフォルト: localhost
   },
   /*
   ** Customize the progress-bar color
